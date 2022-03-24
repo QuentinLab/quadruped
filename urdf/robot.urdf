@@ -1,0 +1,254 @@
+<robot name="Unknown Bot">
+  
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.6 0.3 0.15"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+
+
+<!-- BACK LEFT LEG -->
+  <link name="shoulder_bl_link">
+    <visual>
+      <origin xyz="0 0.05 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.1" /> 
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="baseToShoulder_bl_joint" type="revolute">
+    <origin xyz="-0.2 0.15 0" />
+    <parent link="base_link" />
+    <child link="shoulder_bl_link" />
+    <axis xyz="1 0 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+
+  <link name="thigh_bl_link">
+    <visual>
+      <origin xyz="0 0.05 -0.05" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.2" />
+      </geometry>
+    </visual>
+  </link>
+  
+  <joint name="shoulderToThigh_bl_joint" type="revolute">
+    <origin xyz="0 0.1 0" rpy = "0 0.5 0" />
+    <parent link="shoulder_bl_link" />
+    <child link="thigh_bl_link" />
+    <axis xyz="0 1 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+  <link name="tibia_bl_link">
+    <visual>
+      <origin xyz ="0 0 -0.125" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.25" />
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="tighToTibia_bl_joint" type="revolute">
+    <origin xyz ="0 0.05 -0.15" rpy="0 -0.77 0" />
+    <parent link="thigh_bl_link" />
+    <child link="tibia_bl_link" />
+    <axis xyz="0 1 0" />:
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+<!-- FRONT LEFT LEG -->
+
+  <link name="shoulder_fl_link">
+    <visual>
+      <origin xyz="0 0.05 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.1" /> 
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="baseToShoulder_fl_joint" type="revolute">
+    <origin xyz="0.2 0.15 0" />
+    <parent link="base_link" />
+    <child link="shoulder_fl_link" />
+    <axis xyz="1 0 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+
+  <link name="thigh_fl_link">
+    <visual>
+      <origin xyz="0 0.05 -0.05" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.2" />
+      </geometry>
+    </visual>
+  </link>
+  
+  <joint name="shoulderToThigh_fl_joint" type="revolute">
+    <origin xyz="0 0.1 0" rpy = "0 0.5 0" />
+    <parent link="shoulder_fl_link" />
+    <child link="thigh_fl_link" />
+    <axis xyz="0 1 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+  <link name="tibia_fl_link">
+    <visual>
+      <origin xyz ="0 0 -0.125" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.25" />
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="tighToTibia_fl_joint" type="revolute">
+    <origin xyz ="0 0.05 -0.15" rpy="0 -0.77 0" />
+    <parent link="thigh_fl_link" />
+    <child link="tibia_fl_link" />
+    <axis xyz="0 1 0" />:
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+<!-- BACK RIGHT LEG -->
+
+  <link name="shoulder_br_link">
+    <visual>
+      <origin xyz="0 -0.05 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.1" /> 
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="baseToShoulder_br_joint" type="revolute">
+    <origin xyz="-0.2 -0.15 0" />
+    <parent link="base_link" />
+    <child link="shoulder_br_link" />
+    <axis xyz="1 0 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+
+  <link name="thigh_br_link">
+    <visual>
+      <origin xyz="0 -0.05 -0.05" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.2" />
+      </geometry>
+    </visual>
+  </link>
+  
+  <joint name="shoulderToThigh_br_joint" type="revolute">
+    <origin xyz="0 -0.1 0" rpy = "0 0.5 0" />
+    <parent link="shoulder_br_link" />
+    <child link="thigh_br_link" />
+    <axis xyz="0 1 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+  <link name="tibia_br_link">
+    <visual>
+      <origin xyz ="0 0 -0.125" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.25" />
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="tighToTibia_br_joint" type="revolute">
+    <origin xyz ="0 -0.05 -0.15" rpy="0 -0.77 0" />
+    <parent link="thigh_br_link" />
+    <child link="tibia_br_link" />
+    <axis xyz="0 1 0" />:
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+<!-- FRONT RIGHT LEG -->
+
+  <link name="shoulder_fr_link">
+    <visual>
+      <origin xyz="0 -0.05 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.1" /> 
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="baseToShoulder_fr_joint" type="revolute">
+    <origin xyz="0.2 -0.15 0" />
+    <parent link="base_link" />
+    <child link="shoulder_fr_link" />
+    <axis xyz="1 0 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+
+  <link name="thigh_fr_link">
+    <visual>
+      <origin xyz="0 -0.05 -0.05" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.2" />
+      </geometry>
+    </visual>
+  </link>
+  
+  <joint name="shoulderToThigh_fr_joint" type="revolute">
+    <origin xyz="0 -0.1 0" rpy = "0 0.5 0" />
+    <parent link="shoulder_fr_link" />
+    <child link="thigh_fr_link" />
+    <axis xyz="0 1 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+
+  <link name="tibia_fr_link">
+    <visual>
+      <origin xyz ="0 0 -0.125" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.25" />
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="tighToTibia_fr_joint" type="revolute">
+    <origin xyz ="0 -0.05 -0.15" rpy="0 -0.77 0" />
+    <parent link="thigh_fr_link" />
+    <child link="tibia_fr_link" />
+    <axis xyz="0 1 0" />:
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+</robot>
