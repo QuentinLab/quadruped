@@ -1,0 +1,96 @@
+<?xml version="0.1"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Unknown bot">
+
+
+<material name="red">
+    <color rgba="1 0 0 1" />
+</material>
+
+<material name="blue">
+  <color rgba="0 0 1 1" />
+</material>
+
+<material name="green">
+  <color rgba="0 1 0 1" />
+</material>
+
+<xacro:property name="bodyLen" value="0.6" />
+<xacro:property name="bodyWidth" value="0.3" />
+<xacro:property name="bodyHeight" value="0.15" />
+
+<link name="base_link">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="${bodyLen} ${bodyWidth} ${bodyHeight}"/>
+    </geometry>
+    <material name="white">
+      <color rgba="1 1 1 1" />
+    </material>
+  </visual>
+</link>
+
+<xacro:macro name="leg" params="prefix side front">
+  <link name="shoulder_${prefix}_link">
+    <visual>
+      <origin xyz="0 ${side*0.05} 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.1" /> 
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+ 
+  <joint name="baseToShoulder_${prefix}_joint" type="revolute">
+    <origin xyz="${front*0.2} ${side*bodyWidth/2} 0" />
+    <parent link="base_link" />
+    <child link="shoulder_${prefix}_link" />
+    <axis xyz="1 0 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+  
+  <link name="thigh_${prefix}_link">
+    <visual>
+      <origin xyz="0 ${side*0.05} -0.05" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.2" />
+      </geometry>
+      <material name="green"/>
+    </visual>
+  </link>
+  
+  <joint name="shoulderToThigh_${prefix}_joint" type="revolute">
+    <origin xyz="0 ${side*0.1} 0" rpy = "0 0.5 0" />
+    <parent link="shoulder_${prefix}_link" />
+    <child link="thigh_${prefix}_link" />
+    <axis xyz="0 1 0" />
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+  
+  <link name="tibia_${prefix}_link">
+    <visual>
+      <origin xyz ="0 0 -0.125" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.25" />
+      </geometry>
+      <material name="blue"/>
+    </visual>
+  </link>
+
+  <joint name="tighToTibia_${prefix}_joint" type="revolute">
+    <origin xyz ="0 ${side*0.05} -0.15" rpy="0 -0.77 0" />
+    <parent link="thigh_${prefix}_link" />
+    <child link="tibia_${prefix}_link" />
+    <axis xyz="0 1 0" />:
+    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+  </joint>
+</xacro:macro>
+
+<xacro:leg prefix="bl" side="1" front="-1"/>
+<xacro:leg prefix="br" side="-1" front="-1"/>
+<xacro:leg prefix="fl" side="1" front="1"/>
+<xacro:leg prefix="fr" side="-1" front="1"/>
+
+
+</robot>
+  
