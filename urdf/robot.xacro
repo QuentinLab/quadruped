@@ -14,11 +14,25 @@
   <color rgba="0 1 0 1" />
 </material>
 
+<xacro:property name="inertiaTest" value="0.1" />
 <xacro:property name="bodyLen" value="0.6" />
 <xacro:property name="bodyWidth" value="0.3" />
 <xacro:property name="bodyHeight" value="0.15" />
 
+<link name="world"/>
+<joint name="fixed" type="fixed">
+    <origin xyz="0 0 2" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="base_link"/>
+</joint>
+
 <link name="base_link">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="1"/>
+    <inertia ixx="${inertiaTest}" ixy="0" ixz="0" iyy="${inertiaTest}" iyz = "0" izz="${inertiaTest}" />
+  </inertial>
+  
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0" />
     <geometry>
@@ -28,10 +42,24 @@
       <color rgba="1 1 1 1" />
     </material>
   </visual>
+  
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size="${bodyLen} ${bodyWidth} ${bodyHeight}"/>
+    </geometry>
+  </collision>
+
 </link>
 
 <xacro:macro name="leg" params="prefix side front">
   <link name="shoulder_${prefix}_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="${inertiaTest}" ixy="0" ixz="0" iyy="${inertiaTest}" iyz = "0" izz="${inertiaTest}" />
+    </inertial>
+  
     <visual>
       <origin xyz="0 ${side*0.05} 0" rpy="0 0 0" />
       <geometry>
@@ -39,6 +67,13 @@
       </geometry>
       <material name="red"/>
     </visual>
+  
+    <collision>
+      <origin xyz="0 ${side*0.05} 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.1" /> 
+      </geometry>
+    </collision>
   </link>
  
   <joint name="baseToShoulder_${prefix}_joint" type="revolute">
@@ -46,10 +81,16 @@
     <parent link="base_link" />
     <child link="shoulder_${prefix}_link" />
     <axis xyz="1 0 0" />
-    <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
+    <limit upper="${pi/4}" lower="${-pi/4}" effort="10" velocity="10"/>
   </joint>
   
   <link name="thigh_${prefix}_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.15"/>
+      <inertia ixx="${inertiaTest}" ixy="0" ixz="0" iyy="${inertiaTest}" iyz = "0" izz="${inertiaTest}" />
+    </inertial>
+   
     <visual>
       <origin xyz="0 ${side*0.05} -0.05" rpy="0 0 0" />
       <geometry>
@@ -57,6 +98,13 @@
       </geometry>
       <material name="green"/>
     </visual>
+    
+    <collision>
+      <origin xyz="0 ${side*0.05} -0.05" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.2" />
+      </geometry>
+    </collision>
   </link>
   
   <joint name="shoulderToThigh_${prefix}_joint" type="revolute">
@@ -68,6 +116,12 @@
   </joint>
   
   <link name="tibia_${prefix}_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.15"/>
+      <inertia ixx="${inertiaTest}" ixy="0" ixz="0" iyy="${inertiaTest}" iyz = "0" izz="${inertiaTest}" />
+    </inertial>
+   
     <visual>
       <origin xyz ="0 0 -0.125" rpy="0 0 0" />
       <geometry>
@@ -75,6 +129,13 @@
       </geometry>
       <material name="blue"/>
     </visual>
+    
+    <collision>
+      <origin xyz ="0 0 -0.125" rpy="0 0 0" />
+      <geometry>
+        <box size="0.1 0.1 0.25" />
+      </geometry>
+    </collision>
   </link>
 
   <joint name="tighToTibia_${prefix}_joint" type="revolute">
