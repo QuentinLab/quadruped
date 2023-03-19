@@ -1,9 +1,11 @@
 <?xml version="0.1"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="1 DoF Bot">
 
-    <!-- <xacro:include filename="$(find robot_urdf)/urdf/oneDofBot_description.urdf.xacro" /> -->
-    <xacro:include filename="oneDofBot_description.urdf.xacro" />
+    <xacro:include filename="$(find robot_urdf)/oneDofBot_description.urdf.xacro" /> 
+    <xacro:include filename="$(find robot_urdf)/oneDof_ros2_control.urdf.xacro" />
+    <!-- <xacro:include filename="oneDofBot_description.urdf.xacro" />
     <xacro:include filename="oneDof_ros2_control.urdf.xacro" />
+    -->
 
     <xacro:bot_description />
     <xacro:oneDof_ros2_control/>

@@ -1,7 +1,6 @@
 <?xml version="0.1"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Unknown bot">
 
-
 <material name="red">
     <color rgba="1 0 0 1" />
 </material>
@@ -18,38 +17,41 @@
 <xacro:property name="bodyLen" value="0.6" />
 <xacro:property name="bodyWidth" value="0.3" />
 <xacro:property name="bodyHeight" value="0.15" />
-<link name="world"/>
-<joint name="fixed" type="fixed">
-    <origin xyz="0 0 2" rpy="0 0 0"/>
-    <parent link="world"/>
-    <child link="base_link"/>
-</joint>
 
-<link name="base_link">
-  <inertial>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <mass value="1"/>
-    <inertia ixx="${inertiaTest}" ixy="0" ixz="0" iyy="${inertiaTest}" iyz = "0" izz="${inertiaTest}" />
-  </inertial>
-  
-  <visual>
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <geometry>
-      <box size="${bodyLen} ${bodyWidth} ${bodyHeight}"/>
-    </geometry>
-    <material name="white">
-      <color rgba="1 1 1 1" />
-    </material>
-  </visual>
-  
-  <collision>
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <geometry>
-      <box size="${bodyLen} ${bodyWidth} ${bodyHeight}"/>
-    </geometry>
-  </collision>
+<xacro:macro name="body">
+    <link name="world"/>
+    <joint name="fixed" type="fixed">
+        <origin xyz="0 0 2" rpy="0 0 0"/>
+        <parent link="world"/>
+        <child link="base_link"/>
+    </joint>
 
-</link>
+    <link name="base_link">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1"/>
+        <inertia ixx="${inertiaTest}" ixy="0" ixz="0" iyy="${inertiaTest}" iyz = "0" izz="${inertiaTest}" />
+      </inertial>
+      
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${bodyLen} ${bodyWidth} ${bodyHeight}"/>
+        </geometry>
+        <material name="white">
+          <color rgba="1 1 1 1" />
+        </material>
+      </visual>
+      
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${bodyLen} ${bodyWidth} ${bodyHeight}"/>
+        </geometry>
+      </collision>
+
+  </link>
+</xacro:macro>
 
 <xacro:macro name="leg" params="prefix side front">
   <link name="shoulder_${prefix}_link">
@@ -137,20 +139,14 @@
     </collision>
   </link>
 
-  <joint name="tighToTibia_${prefix}_joint" type="revolute">
+  <joint name="thighToTibia_${prefix}_joint" type="revolute">
     <origin xyz ="0 ${side*0.05} -0.15" rpy="0 -0.77 0" />
     <parent link="thigh_${prefix}_link" />
     <child link="tibia_${prefix}_link" />
-    <axis xyz="0 1 0" />:
+    <axis xyz="0 1 0" />
     <limit upper="3.14" lower="-3.14" effort="10" velocity="10"/>
   </joint>
 </xacro:macro>
-
-<xacro:leg prefix="bl" side="1" front="-1"/>
-<xacro:leg prefix="br" side="-1" front="-1"/>
-<xacro:leg prefix="fl" side="1" front="1"/>
-<xacro:leg prefix="fr" side="-1" front="1"/>
-
 
 </robot>
   

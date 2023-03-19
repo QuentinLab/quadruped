@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="quadruped_ros2_control">
+        <ros2_control name="IgnitionSystem" type="system">
+            <hardware>
+                <plugin>ign_ros2_control/IgnitionSystem</plugin>
+            </hardware>
+
+            <joint name="baseToShoulder_bl_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+            
+            <joint name="shoulderToThigh_bl_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+
+            <joint name="thighToTibia_bl_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+            <joint name="baseToShoulder_br_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+            
+            <joint name="shoulderToThigh_br_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+
+            <joint name="thighToTibia_br_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+
+            <joint name="baseToShoulder_fl_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+            
+            <joint name="shoulderToThigh_fl_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+
+            <joint name="thighToTibia_fl_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+            
+            <joint name="baseToShoulder_fr_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+            
+            <joint name="shoulderToThigh_fr_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+
+            <joint name="thighToTibia_fr_joint">
+                <command_interface name="position"/>
+                <state_interface name="position" />
+                <state_interface name="velocity" />
+            </joint>
+        </ros2_control>
+
+        <gazebo>
+            <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+                <parameters>$(find robot_urdf)/quadruped_controllers.yaml</parameters>
+            </plugin>
+        </gazebo> 
+
+    </xacro:macro>
+</robot>

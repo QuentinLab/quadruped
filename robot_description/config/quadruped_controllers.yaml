@@ -1,0 +1,42 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 1000  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+
+#    forward_position_controller:
+#      type: forward_command_controller/ForwardCommandController
+#
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+#forward_position_controller:
+#  ros__parameters:
+#    joints:
+#      - dof_joint
+#    interface_name: position
+
+
+joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - baseToShoulder_bl_joint 
+      - baseToShoulder_fl_joint 
+      - baseToShoulder_br_joint 
+      - baseToShoulder_fr_joint 
+      - shoulderToThigh_bl_joint
+      - shoulderToThigh_fl_joint
+      - shoulderToThigh_br_joint
+      - shoulderToThigh_fr_joint
+      - thighToTibia_bl_joint
+      - thighToTibia_fl_joint
+      - thighToTibia_br_joint
+      - thighToTibia_fr_joint
+    interface_name: position
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity

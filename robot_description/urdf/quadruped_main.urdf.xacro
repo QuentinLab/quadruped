@@ -1,0 +1,14 @@
+<?xml version="0.1"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="Quadruped">
+
+    <xacro:include filename="$(find robot_urdf)/quadruped_description.urdf.xacro" /> 
+    <xacro:include filename="$(find robot_urdf)/quadruped_simulation.urdf.xacro" /> 
+
+    <xacro:leg prefix="bl" side="1" front="-1"/>
+    <xacro:leg prefix="br" side="-1" front="-1"/>
+    <xacro:leg prefix="fl" side="1" front="1"/>
+    <xacro:leg prefix="fr" side="-1" front="1"/>
+    <xacro:body/>
+    <xacro:quadruped_ros2_control/>
+
+</robot>

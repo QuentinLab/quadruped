@@ -1,0 +1,7 @@
+<library path="robot_hardware">
+    <class  name="robot_hardware/OneDofSimplePosition"
+            type="robot_hardware::OneDofSimplePosition"
+            base_class_type="hardware_interface::SystemInterface">
+        <description> Simple Position Hardware for testing purpose </description>
+    </class>
+</library>

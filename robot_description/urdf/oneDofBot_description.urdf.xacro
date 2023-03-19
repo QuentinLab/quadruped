@@ -23,6 +23,8 @@
         <xacro:property name="upper_length" value="0.1" />
         <xacro:property name="upper_height" value="0.5" />
 
+        <xacro:property name="inertiaTest" value="0.1" />
+
         <joint name="fixed_joint" type="fixed">
             <parent link="world" />
             <child link="base_link" />
@@ -37,12 +39,18 @@
                 </geometry>
                 <material name="red" />
             </visual>
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="1"/>
+                <inertia ixx="${inertiaTest}" ixy="0" ixz="0" iyy="${inertiaTest}" iyz = "0" izz="${inertiaTest}" />
+            </inertial>
         </link>
 
         <joint name="dof_joint" type="continuous" >
             <parent link="base_link" />
             <child link="upper_link" />
             <origin xyz="0 ${base_width/2} ${base_height - 0.1}" />
+            <dynamics damping="0.0" friction="0.0"/>
         </joint>
 
         <link name="upper_link">
@@ -53,6 +61,11 @@
                 </geometry>
                 <material name="blue" />
             </visual>
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="1"/>
+                <inertia ixx="${inertiaTest}" ixy="0" ixz="0" iyy="${inertiaTest}" iyz = "0" izz="${inertiaTest}" />
+            </inertial>
         </link>
 
 
